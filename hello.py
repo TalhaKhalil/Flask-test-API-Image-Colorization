@@ -1,12 +1,3 @@
-# from flask import Flask 
-# app = Flask(__name__)
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-# @app.route('/',method = ['POST'])
-# def get_response():
-#     return 
-# ==================request and response JSON 
 from flask import Flask, render_template, request, url_for, jsonify,Response
 # import jsonpickle
 import numpy as np
@@ -15,24 +6,60 @@ from PIL import Image
 from skimage import color
 import base64
 import os , io , sys
-
+import cloudinary 
+from PIL import Image
+import requests
+from io import BytesIO
+from cloudinary.uploader import upload
 app = Flask(__name__)
 
-@app.route('/')
+os.chdir(os.path.join(os.path.dirname(sys.argv[0]), '.'))
+if os.path.exists('settings.py'):
+    exec(open('settings.py').read())
+
+cloudinary.config( 
+  cloud_name = "drqzgt17b", 
+  api_key = "762526682378155", 
+  api_secret = "9vDOTnh0rNd4i7KmfObjxYGS-C4" 
+)
+# def upload(file, **options)
+
+def read_img_url(url, size = (256,256)):
+    
+    """
+    Read and resize image directly from a url
+    """
+    response = requests.get(url)
+    #print(response.content)
+    
+    img = Image.open(BytesIO(response.content))
+    #print(img)
+
+    return img
+
+@app.route('/') #aws.com/ will return hello world on browser
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/tests/endpoint', methods=['POST'])
+@app.route('/tests/endpoint', methods=['POST']) #aws.com/tests/endpoint # client will send an image and this function will return a text in json
 def my_test_endpoint():
     input_json = request.get_json(force=True) 
     # force=True, above, is necessary if another developer 
     # forgot to set the MIME type to 'application/json'
-    print('data from client:', input_json)
-    dictToReturn = {'answer':42}
+    url = input_json["url"]
+    
+    print('URL =>', url)
+    img=read_img_url(url)
+    print("fetched image")
+    img = img.convert('L')
+    img.save("greyoutput.jpg")
+    res = upload("C:/Users/AALY/myproject/greyoutput.jpg")
+    print(res)
+    dictToReturn = {'url':res["url"]}
     return jsonify(dictToReturn)
 
-@app.route('/api/test', methods=['POST'])
-def test():
+@app.route('/api/test', methods=['POST']) # client will send an image server shall return some string text 
+def test(): 
     r = request
     # convert string of image data to uint8
     files = r.files['image']
@@ -52,15 +79,18 @@ def test():
     response = "Fetched Image"
 
     return Response(response=response, status=200)
-@app.route("/im_size", methods=["POST"])
+@app.route("/im_size", methods=["POST"]) # client will send image to server will return image as well 
 def process_image():
-    file = request.files['image']
+    file1 = request
+    print(file1)
+    file = request.files['image'] 
+    print(file)
     # Read the image via file.stream
     img = Image.open(file.stream)
     img = np.array(img)
     # img = color.rgb2gray(img)
     # img = Image.fromarray(img)
-    # img.save("grey.jpg")
+    # img.save("grey.jpg")  
     # print("saved")
     img = Image.fromarray(img.astype("uint8"))
     rawBytes = io.BytesIO()
