@@ -239,7 +239,8 @@ def discriminator():
         validity = model(image)
         return Model(image,validity)
 
-file_paths = glob('img1.jpg')
+file_paths = glob('projectdemo.jpg')
+
 X_train = convert_img_size(file_paths)
 L = np.array([rgb_to_lab(image,l=True)for image in X_train])
 AB = np.array([rgb_to_lab(image,ab=True)for image in X_train])    
@@ -279,7 +280,7 @@ combined_network.compile(loss='binary_crossentropy',
                          optimizer=Adam(lr=0.0001,beta_1=0.5,beta_2=0.999))
 
 #loading the model
-generator = model_load(dataset='people1')
+generator = model_load(dataset='people2')
 
 #print the original image
 print(L.shape)
