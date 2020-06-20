@@ -562,6 +562,7 @@ def my_test_endpoint():
     print(res)
     dictToReturn = {'url':res["url"]}
     K.clear_session()
+    
     return jsonify(dictToReturn)
 
 @app.route('/api/test', methods=['POST']) # client will send an image server shall return some string text 

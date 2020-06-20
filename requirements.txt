@@ -37,6 +37,7 @@ opencv-python==4.2.0.34
 opt-einsum==3.2.1
 pandas==1.0.4
 pbr==4.0.4
+<<<<<<< HEAD
 Pillow==7.1.2
 protobuf==3.12.2
 pybase64==1.0.1
@@ -61,3 +62,7 @@ Werkzeug==1.0.1
 wincertstore==0.2
 wrapt==1.12.1
 zipp==3.1.0
+=======
+six==1.11.0
+urllib3==1.24.2
+>>>>>>> bcd6a9d1ec09b537027ed4c2bbf47fb5a8fa2df9
