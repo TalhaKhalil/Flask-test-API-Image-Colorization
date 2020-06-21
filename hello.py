@@ -550,7 +550,7 @@ def my_test_endpoint():
     print(pred.shape)
     x = lab_to_rgb(np.dstack((X_train_L,pred.reshape(256,256,2)))).astype('int64')
     print(pred.shape)
-    img = array_to_img(x)
+    img = array_to_img(x) 
     #mahotas.imsave('output.jpg', x)
     #img = Image.fromarray(x, 'RGB')
     img.save("C:/Users/AALY/myproject/output.jpg")
