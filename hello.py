@@ -12,6 +12,7 @@ import requests
 from io import BytesIO
 from cloudinary.uploader import upload
 import requests
+import response
 DEBUG = False
 # from keras.preprocessing.image import load_img,img_to_array,array_to_img
 # import pandas as pd
@@ -280,7 +281,10 @@ def read_img_url(url, size = (256,256)):
 
 @app.route('/') #aws.com/ will return hello world on browser
 def hello_world():
-    return 'Hello, World!'
+    response = jsonify({'Happy': 'Hello, World!'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response 
+    # return 'Hello, World!'
 
 @app.route('/tests/endpoint', methods=['POST']) #aws.com/tests/endpoint # client will send an image and this function will return a text in json
 def my_test_endpoint():
@@ -560,10 +564,13 @@ def my_test_endpoint():
 
     res = upload('C:/Users/AALY/myproject/output.jpg')
     print(res)
-    dictToReturn = {'url':res["url"]}
+    # dictToReturn = {'url':res["url"]}
     K.clear_session()
-    
-    return jsonify(dictToReturn)
+    # responce = jsonify(dictToReturn)
+    response = jsonify({'url':res["url"]})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    # return jsonify(dictToReturn)
+    return response
 
 @app.route('/api/test', methods=['POST']) # client will send an image server shall return some string text 
 def test(): 
