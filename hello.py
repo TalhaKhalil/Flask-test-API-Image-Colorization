@@ -13,6 +13,7 @@ from io import BytesIO
 from cloudinary.uploader import upload
 import requests
 import response
+from flask_cors import CORS, cross_origin
 DEBUG = False
 # from keras.preprocessing.image import load_img,img_to_array,array_to_img
 # import pandas as pd
@@ -254,6 +255,8 @@ DEBUG = False
 
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 os.chdir(os.path.join(os.path.dirname(sys.argv[0]), '.'))
 if os.path.exists('settings.py'):
@@ -287,6 +290,7 @@ def hello_world():
     # return 'Hello, World!'
 
 @app.route('/tests/endpoint', methods=['POST']) #aws.com/tests/endpoint # client will send an image and this function will return a text in json
+@cross_origin()
 def my_test_endpoint():
     input_json = request.get_json(force=True) 
     # force=True, above, is necessary if another developer 
@@ -564,13 +568,13 @@ def my_test_endpoint():
 
     res = upload('C:/Users/AALY/myproject/output.jpg')
     print(res)
-    # dictToReturn = {'url':res["url"]}
+    dictToReturn = {'url':res["url"]}
     K.clear_session()
-    # responce = jsonify(dictToReturn)
-    response = jsonify({'url':res["url"]})
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    # return jsonify(dictToReturn)
-    return response
+    #response = jsonify(dictToReturn)
+    #response = jsonify({'url':res["url"]})
+    #response.headers.add('Access-Control-Allow-Origin', '*')
+    return jsonify(dictToReturn)
+    #return response
 
 @app.route('/api/test', methods=['POST']) # client will send an image server shall return some string text 
 def test(): 
