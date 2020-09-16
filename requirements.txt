@@ -10,6 +10,7 @@ cytoolz==0.10.1
 dask==2.18.1
 decorator==4.4.2
 Flask==1.1.2
+Flask-Cors==3.0.8
 gast==0.2.2
 google-pasta==0.2.0
 grpcio==1.29.0
@@ -37,7 +38,6 @@ opencv-python==4.2.0.34
 opt-einsum==3.2.1
 pandas==1.0.4
 pbr==4.0.4
-<<<<<<< HEAD
 Pillow==7.1.2
 protobuf==3.12.2
 pybase64==1.0.1
@@ -47,6 +47,7 @@ pytz==2020.1
 PyWavelets==1.1.1
 PyYAML==5.3.1
 requests==2.23.0
+response==0.4.0
 scikit-image==0.17.2
 scipy==1.4.1
 six==1.15.0
@@ -62,7 +63,3 @@ Werkzeug==1.0.1
 wincertstore==0.2
 wrapt==1.12.1
 zipp==3.1.0
-=======
-six==1.11.0
-urllib3==1.24.2
->>>>>>> bcd6a9d1ec09b537027ed4c2bbf47fb5a8fa2df9
