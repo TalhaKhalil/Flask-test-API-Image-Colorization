@@ -29,7 +29,6 @@ kiwisolver==1.2.0
 Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.1
-mkl-service==2.3.0
 mock==2.0.0
 networkx==2.4
 numpy==1.18.5
