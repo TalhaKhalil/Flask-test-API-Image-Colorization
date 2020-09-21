@@ -301,7 +301,7 @@ def my_test_endpoint():
     img=read_img_url(url)
 
     print("fetched image")
-    img.save("C:/Users/AALY/myproject/fetchedimg.jpg")
+    img.save("fetchedimg.jpg")
     print("fetched image is saved")
     
    
@@ -335,15 +335,15 @@ def my_test_endpoint():
         Loads the model depending on which dataset we are working on
         '''
         if dataset == 'people1':
-            model = load_model('C:/Users/AALY/myproject/generator_people_v1.h5')
+            model = load_model('generator_people_v1.h5')
             # model._make_predict_function()
             # graph = tf.get_default_graph()
         if dataset == 'people2':
-            model = load_model('C:/Users/AALY/myproject/generator_people_v3.h5')
+            model = load_model('generator_people_v3.h5')
             # model._make_predict_function()
             # graph = tf.get_default_graph()
         elif dataset == 'coast':
-            model = load_model('C:/Users/AALY/myproject/generator_v1.h5')
+            model = load_model('generator_v1.h5')
             # model._make_predict_function()
             # graph = tf.get_default_graph()
         return model
@@ -496,7 +496,7 @@ def my_test_endpoint():
         validity = model(image)
         return Model(image,validity)
 
-    file_paths = glob('C:/Users/AALY/myproject/fetchedimg.jpg')
+    file_paths = glob('fetchedimg.jpg')
     print("loaded fetched img")
     print("******started coloring***********")
     X_train = convert_img_size(file_paths)
@@ -547,7 +547,7 @@ def my_test_endpoint():
     img = array_to_img(k)
     #mahotas.imsave('orignal.jpg', k)
     #img = Image.fromarray(k, 'RGB')
-    img.save('C:/Users/AALY/myproject/orignal.jpg')
+    img.save('orignal.jpg')
     #img.show()
     #print the predicted colored image
     
@@ -561,12 +561,12 @@ def my_test_endpoint():
     img = array_to_img(x) 
     #mahotas.imsave('output.jpg', x)
     #img = Image.fromarray(x, 'RGB')
-    img.save("C:/Users/AALY/myproject/output.jpg")
+    img.save("output.jpg")
 
 
 
 
-    res = upload('C:/Users/AALY/myproject/output.jpg')
+    res = upload('output.jpg')
     print(res)
     dictToReturn = {'url':res["url"]}
     K.clear_session()
