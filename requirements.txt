@@ -10,7 +10,7 @@ cytoolz==0.10.1
 dask==2.18.1
 decorator==4.4.2
 Flask==1.1.2
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 gast==0.2.2
 google-pasta==0.2.0
 grpcio==1.29.0
